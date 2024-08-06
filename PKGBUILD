@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0
+#
+# Maintainer: Truocolo <truocolo@aol.com>
+# Maintainer: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
 # Maintainer: Baptiste Jonglez <archlinux at bitsofnetworks dot org>
 # Maintainer: Levente Polyak <anthraxx[at]archlinux[dot]org>
 # Contributor: Bart Verhagen <barrie.verhagen at gmail dot com>
