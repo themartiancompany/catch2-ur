@@ -10,7 +10,15 @@ pkgname=catch2
 pkgver=3.6.0
 pkgrel=1
 pkgdesc="Modern, C++-native, header-only, test framework for unit-tests, TDD and BDD"
-arch=('x86_64')
+arch=(
+  'x86_64'
+  'arm'
+  'armv7l'
+  'aarch64'
+  'i686'
+  'pentium4'
+  'mips'
+)
 url="https://github.com/catchorg/catch2"
 license=(BSL-1.0)
 #depends=('gcc-libs' 'glibc') # only needed when building shared library
