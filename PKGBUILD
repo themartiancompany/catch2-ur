@@ -9,7 +9,7 @@
 pkgname=catch2
 pkgver=3.6.0
 pkgrel=1
-pkgdesc=(
+_pkgdesc=(
   "Modern, C++-native, header-only,"
   "test framework for unit-tests, TDD and BDD"
 )
