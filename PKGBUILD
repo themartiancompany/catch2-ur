@@ -9,7 +9,11 @@
 pkgname=catch2
 pkgver=3.6.0
 pkgrel=1
-pkgdesc="Modern, C++-native, header-only, test framework for unit-tests, TDD and BDD"
+pkgdesc=(
+  "Modern, C++-native, header-only,"
+  "test framework for unit-tests, TDD and BDD"
+)
+pkgdesc="${_pkgdesc[*]}"
 arch=(
   'x86_64'
   'arm'
@@ -19,17 +23,26 @@ arch=(
   'pentium4'
   'mips'
 )
-url="https://github.com/catchorg/catch2"
+_http="https://github.com"
+_ns="catchorg"
+url="${_http}/${_ns}/${pkgname}"
 license=(BSL-1.0)
-#depends=('gcc-libs' 'glibc') # only needed when building shared library
+# only needed when building shared library
+# depends=(
+#   'gcc-libs'
+#   'glibc'
+# ) 
 makedepends=(
   git
   cmake
   python  # python seems to be necessary for building tests (FS#60273)
 )
 conflicts=('catch2-v2')
-source=(${pkgname}::"git+https://github.com/catchorg/Catch2#tag=v${pkgver}?signed")
-sha512sums=('2abfe4eef3928baf996773c549b599834e970ace19e8bea02b18e130c4186860e334bfba7badba04f60cbbd43a1c545cd4c032f729888fdbb2d2bbe11c02ae46')
+source=(
+  ${pkgname}::"git+${url}#tag=v${pkgver}?signed")
+sha512sums=(
+  '2abfe4eef3928baf996773c549b599834e970ace19e8bea02b18e130c4186860e334bfba7badba04f60cbbd43a1c545cd4c032f729888fdbb2d2bbe11c02ae46'
+)
 validpgpkeys=(
   E29C46F3B8A7502860793B7DECC9C20E314B2360 # Martin Hořeňovský
   81E70B717FFB27AFDB45F52090BBFF120F9C087B # Jozef Grajciar
@@ -37,10 +50,13 @@ validpgpkeys=(
 
 build() {
   # our recent default flags break test 1 (ApprovalTests)
-  unset CXXFLAGS
-
-  cmake -B "${pkgname}"/build \
-    -S "${pkgname}" \
+  unset \
+    CXXFLAGS
+  cmake \
+    -B \
+      "${pkgname}"/build \
+    -S \
+      "${pkgname}" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCATCH_BUILD_EXAMPLES=OFF \
@@ -48,13 +64,13 @@ build() {
     -DCATCH_ENABLE_WERROR=OFF \
     -DBUILD_TESTING=OFF \
     -DBUILD_SHARED_LIBS=OFF
-
-#    -DBUILD_TESTING=ON \
-#    -DCATCH_BUILD_TESTING=ON \
-#    -DCATCH_DEVELOPMENT_BUILD=ON -Wno-dev \
-#    -DCATCH_BUILD_EXTRA_TESTS=ON 
-
-  cmake --build "${pkgname}"/build
+    # -DBUILD_TESTING=ON \
+    # -DCATCH_BUILD_TESTING=ON \
+    # -DCATCH_DEVELOPMENT_BUILD=ON -Wno-dev \
+    # -DCATCH_BUILD_EXTRA_TESTS=ON 
+  cmake \
+    --build \
+    "${pkgname}/build"
 }
 
 #check() {
@@ -64,7 +80,10 @@ build() {
 #}
 
 package() {
-  DESTDIR="${pkgdir}" cmake --install "${pkgname}"/build
+  DESTDIR="${pkgdir}" \
+  cmake \
+    --install \
+    "${pkgname}/build"
 }
 
 # vim: ts=2 sw=2 et:
